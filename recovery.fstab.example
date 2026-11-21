@@ -1,0 +1,6 @@
+# <точка монтирования> <устройство> <fs> [опции]
+# Реальные имена разделов возьмите из scatter/.pac-файла прошивки часов
+# или из /dev/block/by-name на живом устройстве.
+/cache     /dev/block/by-name/cache     ext4  rw
+/data      /dev/block/by-name/userdata  ext4  rw
+/system    /dev/block/by-name/system     ext4  ro
