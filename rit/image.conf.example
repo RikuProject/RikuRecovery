@@ -1,0 +1,31 @@
+# Конфиг сборки recovery.img. Скопируйте в image.conf и поправьте пути:
+#   cp image.conf.example image.conf && tools/mkimg.sh
+
+# Стоковый recovery.img (или boot.img, если рекавери вшито в boot) — из него
+# берутся ядро, dtb и ВСЕ параметры образа (адреса, cmdline, версия
+# заголовка). Подбирать их вручную не нужно.
+STOCK_IMG=stock/recovery.img
+
+# Бинарь рекавери под архитектуру часов (из артефакта сборки на GitHub):
+#   recovery-armv7 — 32-битные часы, recovery-aarch64 — 64-битные
+BINARY=out/recovery-armv7
+
+# Таблица разделов (формат: точка устройство fs [опции])
+FSTAB=recovery.fstab
+
+# Необязательно: каталог с доп. файлами, копируется в корень ramdisk
+# (например ramdisk/sbin/busybox, ramdisk/sbin/mke2fs — нужны для очистки)
+OVERLAY=
+
+# Результат
+OUT=out/recovery.img
+
+# Инструменты AOSP (https://android.googlesource.com/platform/system/tools/mkbootimg):
+#   git clone https://android.googlesource.com/platform/system/tools/mkbootimg tools/aosp-mkbootimg
+MKBOOTIMG=tools/aosp-mkbootimg/mkbootimg.py
+UNPACK_BOOTIMG=tools/aosp-mkbootimg/unpack_bootimg.py
+
+# Необязательно: дополнительные аргументы mkbootimg, например
+#   EXTRA_ARGS="--cmdline 'console=ttyS1 androidboot.hardware=sp9832e'"
+# (перекрывают значения из стокового образа)
+EXTRA_ARGS=
